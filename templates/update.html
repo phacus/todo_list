@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h5>Update</h5>
+<hr>
+<form method="POST">
+    <label for="title">標題</label>
+    <div class="form-group">
+        <input type="text" class="form-control" name="title" autocomplete="off" value="{{ task.title }}">
+    </div>
+    <input class="btn btn-success" type="submit" name="submit" value="更新">
+    Last updated time: {{ task.create_time.strftime('%Y-%m-%d %H:%M:%S') }}
+</form>
+{% endblock %}

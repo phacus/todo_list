@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h5>Login</h5>
+<hr>
+<form method="POST">
+    <div class="form-group">
+        <label for="username">使用者名稱</label>
+        {% if request.args.get('username') %}
+        <input type="text" class="form-control" name="username" value="{{ request.args.get('username') }}" autocomplete="off" required>
+        {% else %}
+        <input type="text" class="form-control" name="username" autocomplete="off" required>
+        {% endif %}
+    </div>
+    <div class="form-group">
+        <label for="password">密碼</label>
+        <input type="password" class="form-control" name="password" required>
+    </div>
+    <input class="btn btn-success" type="submit" name="submit" value="登入">
+</form>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if current_user.is_authenticated %}
+    <form class="form-inline" method="POST">
+        <div class="form-group">
+            <label for="title" class="mr-3">標題</label>
+            <input type="text" class="form-control" name="title" autocomplete="off" required>
+        </div>
+        <input class="btn btn-success ml-3" type="submit" name="submit" value="新增便條">
+    </form>
+    <h6 class="text-muted my-3">total: {{ tasks.count() }} tasks</h6>
+    {% else %}
+    <h5>使用便條功能請登入</h5>
+    {% endif %}
+    <hr>
+    <div class="row">
+        {% for task in tasks|sort(attribute='create_time', reverse=True) %}
+        <div class="card bg-warning my-2" style="width: 33%;">
+            <div class="card-body">
+                <h5 class="card-title"><b>{{ task.title }}</b></h5>
+                <p class="card-text text-muted">
+                    {{ task.create_time.strftime('%Y-%m-%d %H:%M:%S') }}
+                </p>
+                <a href="{{ url_for('update', task_id=task.id) }}" class="card-link btn btn-info">編輯</a>
+                <a class="card-link btn">
+                <form class="form-inline" method="POST" action="{{ url_for('delete', task_id=task.id) }}">
+                    <input class="card-link btn btn-danger" type="submit" name="delete" value="刪除" onclick="return confirm('確定刪除?')">
+                </form>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
