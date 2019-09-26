@@ -11,4 +11,4 @@ Python flask 實作簡易 CRUD 功能、使用者驗證
 
 ## Screenshot
 
-![index](./src/index.png)
+![index](./src/index.PNG)
